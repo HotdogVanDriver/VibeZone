@@ -1,0 +1,12 @@
+{
+  "name": "discord-webhook",
+  "version": "1.0.0",
+  "description": "A Node.js script to send a message to a Discord webhook",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
