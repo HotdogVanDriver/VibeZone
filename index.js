@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const webhookUrl = process.env.WEBHOOK_URL;
 const currentDate = new Date();
-const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+const daysPassed = Math.ceil((currentDate - new Date('2023-06-08')) / (1000 * 60 * 60 * 24));
 
 const powers = {
   R1: { currentPower: 1000000, dailyIncrease: 100, percentIncrease: 0.04 },
