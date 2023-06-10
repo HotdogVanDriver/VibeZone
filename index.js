@@ -2,7 +2,9 @@ const axios = require('axios');
 
 const webhookUrl = process.env.WEBHOOK_URL;
 const currentDate = new Date();
-const daysPassed = Math.ceil((currentDate - new Date('2023-06-08')) / (1000 * 60 * 60 * 24));
+const currentUTCDate = Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate());
+const startingUTCDate = Date.UTC(2023, 5, 8); // JavaScript counts months from 0
+const daysPassed = Math.ceil((currentUTCDate - startingUTCDate) / (1000 * 60 * 60 * 24));
 
 const powers = {
   R1: { currentPower: 1000000, dailyIncrease: 100, percentIncrease: 0.04 },
