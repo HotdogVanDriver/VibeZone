@@ -13,12 +13,11 @@ const powers = {
 
 for (let rank in powers) {
   let powerData = powers[rank];
-  let dailyIncrease = powerData.dailyIncrease;
   for (let i = 0; i < daysPassed; i++) {
-    powerData.currentPower += dailyIncrease;
-    powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000; // Round to the nearest 100,000
-    dailyIncrease *= (1 + powerData.percentIncrease);
+    powerData.currentPower += powerData.dailyIncrease;
+    powerData.dailyIncrease *= (1 + powerData.percentIncrease);
   }
+  powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000; // Round to the nearest 100,000
   powers[rank] = powerData;
 }
 
