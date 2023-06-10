@@ -15,19 +15,19 @@ for (let rank in powers) {
   let powerData = powers[rank];
   let dailyIncrease = powerData.dailyIncrease;
   for (let i = 0; i < daysPassed; i++) {
+    powerData.currentPower += dailyIncrease;
+    powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000; // Round to the nearest 100,000
     dailyIncrease *= (1 + powerData.percentIncrease);
   }
-  powerData.currentPower += dailyIncrease * daysPassed;
-  powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000;  // Round to the nearest 100,000
   powers[rank] = powerData;
 }
 
-let messageContent = "Updated Power Requirements:\n\n";  // Add a header to the message
+let messageContent = "Updated Power Requirements:\n\n"; // Add a header to the message
 const message = Object.entries(powers).map(([rank, { currentPower }]) => {
   return `${rank}: ${currentPower.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 }).join('\n');
-messageContent += message;  // Add your table to the message content
+messageContent += message; // Add your table to the message content
 
-axios.post(webhookUrl, { content: messageContent })  // Send the message to the channel
+axios.post(webhookUrl, { content: messageContent }) // Send the message to the channel
   .then(() => console.log('Message sent successfully'))
   .catch(err => console.error('Failed to send message:', err));
