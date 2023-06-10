@@ -12,4 +12,4 @@ jobs:
     steps:
     - name: Trigger Rebuild
       run: |
-        curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_YourProjectId/YourVercelDeployHook
+        curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_lMxfZAiCW7mQtSg1vSh0GFVvQcZF/2z6ZpZWwkQ
