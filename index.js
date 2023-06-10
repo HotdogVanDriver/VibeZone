@@ -1,10 +1,15 @@
-const axios = require('axios'); 
+const axios = require('axios');
 
 const webhookUrl = process.env.WEBHOOK_URL;
 const currentDate = new Date();
-const currentUTCDate = Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate());
-const startingUTCDate = Date.UTC(2023, 5, 8); // JavaScript counts months from 0
-const daysPassed = Math.ceil((currentUTCDate - startingUTCDate) / (1000 * 60 * 60 * 24));
+const startDateTime = new Date('2023-06-08').getTime();
+
+console.log("Current UTC Date:", currentDate.getTime());
+console.log("Starting UTC Date:", startDateTime);
+
+const daysPassed = Math.ceil((currentDate.getTime() - startDateTime) / (1000 * 60 * 60 * 24));
+
+console.log("Days Passed:", daysPassed);
 
 const powers = {
   R1: { currentPower: 1000000, dailyIncrease: 100, percentIncrease: 0.04 },
@@ -13,17 +18,17 @@ const powers = {
   R4: { currentPower: 4000000, dailyIncrease: 400, percentIncrease: 0.10 },
 };
 
-console.log('Current UTC Date:', currentUTCDate);
-console.log('Starting UTC Date:', startingUTCDate);
-console.log('Days Passed:', daysPassed);
-
 for (let rank in powers) {
   let powerData = powers[rank];
+  let dailyIncrease = powerData.dailyIncrease;
   for (let i = 0; i < daysPassed; i++) {
-    powerData.currentPower += powerData.dailyIncrease;
-    powerData.dailyIncrease = powerData.dailyIncrease * (1 + powerData.percentIncrease);
+    dailyIncrease *= (1 + powerData.percentIncrease);
   }
+  powerData.currentPower += dailyIncrease * daysPassed;
   powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000; // Round to the nearest 100,000
+  
+  console.log(rank, "Power:", powerData.currentPower); // Log the power calculation
+
   powers[rank] = powerData;
 }
 
