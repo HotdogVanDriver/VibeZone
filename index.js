@@ -13,6 +13,10 @@ const powers = {
   R4: { currentPower: 4000000, dailyIncrease: 400, percentIncrease: 0.10 },
 };
 
+console.log('Current UTC Date:', currentUTCDate);
+console.log('Starting UTC Date:', startingUTCDate);
+console.log('Days Passed:', daysPassed);
+
 for (let rank in powers) {
   let powerData = powers[rank];
   for (let i = 0; i < daysPassed; i++) {
