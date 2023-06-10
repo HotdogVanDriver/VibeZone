@@ -20,15 +20,10 @@ const powers = {
 
 for (let rank in powers) {
   let powerData = powers[rank];
-  let dailyIncrease = powerData.dailyIncrease;
   for (let i = 0; i < daysPassed; i++) {
-    dailyIncrease *= (1 + powerData.percentIncrease);
+    powerData.currentPower += powerData.currentPower * powerData.percentIncrease;
   }
-  powerData.currentPower += dailyIncrease * daysPassed;
   powerData.currentPower = Math.round(powerData.currentPower / 100000) * 100000; // Round to the nearest 100,000
-  
-  console.log(rank, "Power:", powerData.currentPower); // Log the power calculation
-
   powers[rank] = powerData;
 }
 
